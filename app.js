@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const { mongoUri } = require("./config/keys");
 const WrfOut = require("./models/WrfOut");
 const getNcMeta = require("./utils/getNcMeta");
+const addFileHandler = require("./utils/addFileHandler");
 
 const readdir = util.promisify(fs.readdir);
 
@@ -40,9 +41,7 @@ const startServer = async function() {
       console.log({ insertedFiles });
     }
 
-    watcher.on("add", path => {
-      console.log({ path, time: new Date() });
-    });
+    watcher.on("add", addFileHandler);
 
     app.listen(9000, () => {
       console.log("Server started running at port 9000");
