@@ -33,7 +33,7 @@ const startServer = async function() {
       wrfDataDb = wrfData.map(el => el.name),
       wrfFilesToBeProcessed = wrfFiles
         .filter(el => wrfDataDb.indexOf(el) == -1)
-        .map(el => "/home/mutasim/wrf_out/" + el)
+        .map(el => process.env.PATH_WRF_DIR + el)
         .map(getNcMeta);
 
     if (wrfFilesToBeProcessed.length) {
